@@ -1,0 +1,18 @@
+services:
+  db:
+    image: mariadb:11
+    environment:
+      MARIADB_ROOT_PASSWORD: secreto   # SOLO practica; en algo real usa .env (ver 04-avanzado)
+      MARIADB_DATABASE: tienda
+    volumes:
+      - datos:/var/lib/mysql
+
+  panel:
+    image: adminer
+    ports:
+      - "127.0.0.1:8081:8080"
+    depends_on:
+      - db
+
+volumes:
+  datos:
